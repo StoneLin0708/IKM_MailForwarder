@@ -1,4 +1,6 @@
-*.json
-*.txt
+/config.json
+/members.json
+/last_send.txt
+/subject_filter.txt
 __pycache__
 /log

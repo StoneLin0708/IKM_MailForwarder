@@ -1,0 +1,15 @@
+{
+    "host": "mail.com",
+
+    "imap_port": 123,
+    "imap_user" :"myimapuser",
+    "imap_pw" :"password",
+
+    "smtp_port": 456,
+    "smtp_user":"mysmtpuser",
+    "smtp_pw" :"password",
+
+    "update_interval": 180,
+    "send_interval": 10
+
+}
