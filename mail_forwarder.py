@@ -45,7 +45,7 @@ class MailForwarder:
     def _create_error_mail(self, subject, error_text):
         msg = MIMEMultipart('alternative')
         msg['Subject'] = subject
-        msg['From'] = self.config['smtpuser']
+        msg['From'] = self.config['smtp_user']
         msg['To'] = ','.join(self._get_manager_emails())
         msg.attach(MIMEText(error_text, 'plain'))
         return msg
@@ -79,6 +79,7 @@ class MailForwarder:
             self.logger.error(f'fetch mail failed : {e}')
 
         if mails is None:
+            time.sleep(16)
             return
 
         if len(mails) > 1:
