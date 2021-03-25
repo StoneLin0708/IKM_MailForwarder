@@ -125,6 +125,9 @@ class MailForwarder:
             self._send_mails_to_manager(self._create_error_mail(
                 f'{dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")} : Sending Mail Failed',
                 str(e)))
+            self.logger.error('Shotdown server due to sending error')
+            exit()
+
 
 
 def create_logger(logname, console=False):
