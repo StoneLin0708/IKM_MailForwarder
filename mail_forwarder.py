@@ -40,7 +40,7 @@ class MailForwarder:
         return self.users.values()
 
     def _get_manager_emails(self):
-        return self.users.values()
+        return self.managers.values()
 
     def _create_error_mail(self, subject, error_text):
         msg = MIMEMultipart('alternative')
