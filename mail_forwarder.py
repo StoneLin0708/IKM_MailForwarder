@@ -16,14 +16,12 @@ import time
 
 class MailForwarder:
     def __init__(self, config, last_send, members, subject_filter, logger):
-        self.config = json.load(open(config))
+        self.config = config
         self.last_send = last_send
-        m = json.load(open(members))
-        self.users = m['users']
-        self.managers = m['managers']
+        self.users = members['users']
+        self.managers = members['managers']
         self.logger = logger
-        self.subject_filter = [x.strip()
-                               for x in open(subject_filter).readlines()]
+        self.subject_filter = subject_filter
 
     def _is_filtered(self, mail):
         return mail['Subject'] in self.subject_filter
@@ -129,7 +127,6 @@ class MailForwarder:
             exit()
 
 
-
 def create_logger(logname, console=False):
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
@@ -160,10 +157,11 @@ def main():
     logger.info('Start')
 
     forwarder = MailForwarder(
-        config='config.json',
+        config=json.load(open('config.json')),
         last_send='last_send.txt',
-        members='members.json',
-        subject_filter='subject_filter.txt',
+        members=json.load(open('members.json')),
+        subject_filter=[x.strip()
+                        for x in open('subject_filter.txt').readlines()],
         logger=logger,
     )
 
