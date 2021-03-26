@@ -57,9 +57,10 @@ class MailForwarder:
                 ret = server.sendmail(self.config['smtp_user'],
                                       self._get_manager_emails(),
                                       mail.as_string())
-                self.logger.error(f'`{mail["subject"]}` sending failed')
-                for address, err in ret.items():
-                    self.logger.error(f'{address}: {err}')
+                if len(ret) > 0:
+                    self.logger.error(f'`{mail["subject"]}` sending failed')
+                    for address, err in ret.items():
+                        self.logger.error(f'{address}: {err}')
         except Exception as e:
             self.logger.error(f'`{mail["subject"]}` sending failed : {e}')
 
